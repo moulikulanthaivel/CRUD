@@ -2,6 +2,7 @@ import  express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRouter from "./routes/userRouter.js";
+import authRouter from "./routes/authRouter.js";
 
 dotenv.config({path:"./setting/.env"})
 let port  = process.env.PORT
@@ -9,15 +10,18 @@ let host  = process.env.HOST
 let mongo  = process.env.MONGO_URL
 
 mongoose.connect(mongo)
-.then(()=>{console.log('db connected')})
-.catch((err)=>{console.log('db not connected')})
+.then(()=>{console.log('connected to MongoDB')})
+.catch((error)=>{console.log(error)})
 
 
 const app = express();
+
+app.use(express.json()); 
 
 app.listen(port,host, (err)=>{
     if(err) throw err
     console.log(`http://${host}:${port}/`)
 })
 
-app.use("/api", userRouter)
+app.use("/api/user", userRouter)
+app.use("/api/auth/" , authRouter)

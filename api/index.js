@@ -14,6 +14,7 @@ mongoose.connect(mongo)
 
 const app = express();
 
-app.listen(3000, ()=>{
-    console.log("server 3000")
+app.listen(port,host, (err)=>{
+    if(err) throw err
+    console.log(`http://${host}:${port}/`)
 })

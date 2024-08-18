@@ -1,6 +1,7 @@
 import  express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import userRouter from "./routes/userRouter.js";
 
 dotenv.config({path:"./setting/.env"})
 let port  = process.env.PORT
@@ -18,3 +19,5 @@ app.listen(port,host, (err)=>{
     if(err) throw err
     console.log(`http://${host}:${port}/`)
 })
+
+app.use("/api", userRouter)

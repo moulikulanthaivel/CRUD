@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import userRouter from "./routes/userRouter.js";
 import authRouter from "./routes/authRouter.js";
 
+
 dotenv.config({path:"./setting/.env"})
 let port  = process.env.PORT
 let host  = process.env.HOST
@@ -11,7 +12,7 @@ let mongo  = process.env.MONGO_URL
 
 mongoose.connect(mongo)
 .then(()=>{console.log('connected to MongoDB')})
-.catch((error)=>{console.log(error)})
+.catch((error)=>{console.log("not connected to DB")})
 
 
 const app = express();
@@ -24,4 +25,4 @@ app.listen(port,host, (err)=>{
 })
 
 app.use("/api/user", userRouter)
-app.use("/api/auth/" , authRouter)
+app.use("/api/auth" , authRouter)
